@@ -1,0 +1,145 @@
+#include <Adafruit_NeoPixel.h>
+#include <IRremote.h>
+
+int RECV_PIN = 11;
+IRrecv irrecv(RECV_PIN);
+decode_results results;
+
+int inByte;
+
+#define BUTTON_1 0xFFA25D
+#define BUTTON_2 0xFF629D
+#define BUTTON_3 0xFF22DD
+#define BUTTON_4 0xFF02FD
+#define BUTTON_5 0xFFE01F
+#define BUTTON_6 0xFFA857
+#define BUTTON_7 0xFF6897
+#define BUTTON_8 0xFF9867
+#define BUTTON_9 0xFF30CF
+#define BUTTON_10 0xFF18E7
+
+
+
+
+
+#ifdef __AVR__
+  #include <avr/power.h>
+#endif
+
+#define PIN 4
+
+#define NUM_LEDS 60
+
+#define BRIGHTNESS 50
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUM_LEDS, PIN, NEO_GRBW + NEO_KHZ800);
+
+byte neopix_gamma[] = {
+    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
+    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  1,  1,  1,  1,
+    1,  1,  1,  1,  1,  1,  1,  1,  1,  2,  2,  2,  2,  2,  2,  2,
+    2,  3,  3,  3,  3,  3,  3,  3,  4,  4,  4,  4,  4,  5,  5,  5,
+    5,  6,  6,  6,  6,  7,  7,  7,  7,  8,  8,  8,  9,  9,  9, 10,
+   10, 10, 11, 11, 11, 12, 12, 13, 13, 13, 14, 14, 15, 15, 16, 16,
+   17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 24, 24, 25,
+   25, 26, 27, 27, 28, 29, 29, 30, 31, 32, 32, 33, 34, 35, 35, 36,
+   37, 38, 39, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 50,
+   51, 52, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 67, 68,
+   69, 70, 72, 73, 74, 75, 77, 78, 79, 81, 82, 83, 85, 86, 87, 89,
+   90, 92, 93, 95, 96, 98, 99,101,102,104,105,107,109,110,112,114,
+  115,117,119,120,122,124,126,127,129,131,133,135,137,138,140,142,
+  144,146,148,150,152,154,156,158,160,162,164,167,169,171,173,175,
+  177,180,182,184,186,189,191,193,196,198,200,203,205,208,210,213,
+  215,218,220,223,225,228,231,233,236,239,241,244,247,249,252,255 };
+
+
+
+void setup() {
+  Serial.begin(9600);
+  strip.setBrightness(BRIGHTNESS);
+  strip.begin();
+  strip.show(); // Initialize all pixels to 'off'
+  irrecv.enableIRIn(); // Start the receiver
+  Serial.println("Ready");
+
+}
+
+void loop() {
+    if (Serial.available() > 0) {
+    // get incoming byte:
+    inByte = Serial.read();
+    Serial.println(inByte);
+  }
+   if(inByte == 49){
+    strip.setPixelColor(1, strip.Color(255,0,0));
+     strip.show();
+   }
+      if(inByte == 50){
+    strip.setPixelColor(1, strip.Color(0,0,0));
+     strip.show();
+   }
+    if (irrecv.decode(&results)) {
+    Serial.println(results.value, HEX);
+    if (results.value == BUTTON_1){
+      Serial.println("first val");
+      strip.setPixelColor(0, strip.Color(0,0,0,255));
+      strip.show();
+    }else if(results.value == BUTTON_2){
+      Serial.println("second val");
+            strip.setPixelColor(0, strip.Color(0,0,0,0));
+      strip.show();
+      
+    }
+    
+    
+    else if (results.value == BUTTON_3){
+      Serial.println("second val");
+      strip.setPixelColor(1, strip.Color(0,0,0,255));
+      strip.show();
+    }else if(results.value == BUTTON_4){
+            strip.setPixelColor(1, strip.Color(0,0,0));
+     strip.show();
+    }
+   
+
+
+     else if (results.value == BUTTON_5){
+      Serial.println("second val");
+      strip.setPixelColor(2, strip.Color(0,0,0,255));
+      strip.show();
+    }else if(results.value == BUTTON_6){
+            strip.setPixelColor(2, strip.Color(0,0,0));
+      strip.show();
+
+    }
+
+    else if (results.value == BUTTON_7){
+      Serial.println("second val");
+      strip.setPixelColor(3, strip.Color(0,0,0,255));
+      strip.show();
+    }else if(results.value == BUTTON_8){
+            strip.setPixelColor(3, strip.Color(0,0,0));
+      strip.show();
+
+    }
+
+    else if (results.value == BUTTON_9){
+      Serial.println("second val");
+      strip.setPixelColor(4, strip.Color(0,0,0,255));
+      strip.show();
+    }else if(results.value == BUTTON_10){
+            strip.setPixelColor(4, strip.Color(0,0,0));
+      strip.show();
+
+    }
+
+    irrecv.resume(); // Receive the next value
+  }
+    
+  }
+
+ 
+  
+
+
+
