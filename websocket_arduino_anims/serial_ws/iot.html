@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<title>GoodNight</title>
+
+	<link rel="stylesheet" type="text/css" href="lib/css/jquery.mobile.structure-1.4.5.min.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+
+  <script src="lib/js/jquery-2.2.4.min.js"></script>
+  <script src="lib/js/jquery.mobile-1.4.5.min.js"></script>
+  <script src="lib/js/lodash.min.js"></script>
+  <script src="js/main.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+
+        var socket = io.connect('//localhost:8080');
+        var mydata;
+        socket.on('data', function(data) {
+            console.log(data);
+            $('#incoming').text(data);
+        });
+        socket.on('error', function() {
+            console.error(arguments)
+        });
+
+        function sendData(val){
+            socket.emit("data", val);
+            console.log(val);
+        }
+    </script>
+
+</head>
+<body style="background-image:url('img/background.png');background-size: cover">
+
+	<section data-role="page" id="room-page">
+     <header data-role="header">
+     
+        <h1></h1>
+    </header>
+
+    <div data-role="main" >
+
+      
+      <ul>
+
+       <li class="flex-parent room-li-style">
+        <div class="flex-none">
+           <img class="deviceicon" src="img/light.png" alt="" style="width: 40px;">
+        </div>
+
+        <a href="#bedsidestting-page"><div class="flex-child">
+          <p class="devicename">Bedside lamp</p>
+          
+        </div></a>
+        <div class="flex-none" style="margin-right: 5%;
+    margin-top: 5%;">
+         <label class="switch" style="" >
+           <input  type="checkbox" data-role="none" onclick="sendData(1)">
+          <span class="slider round"></span>
+          </label>
+        </div>
+     
+      </li>
+    
+     </ul>
+     
+
+     <a href="#lampstting-page"><ul>
+
+       <li class="flex-parent room-li-style">
+        <div class="flex-none">
+           <img class="deviceicon" src="img/light.png" alt="" style="width: 40px;">
+        </div>
+
+        <div class="flex-child">
+          <p class="devicename">Lamp</p>
+          
+        </div>
+        <div class="flex-none" style="margin-right: 5%;
+    margin-top: 5%;">
+         <label class="switch" style="">
+           <input  type="checkbox" data-role="none" c>
+          <span class="slider round"></span>
+          </label>
+        </div>
+     
+      </li>
+    
+     </ul>
+     </a>
+
+     <a href="#workshopstting-page"><ul>
+
+       <li class="flex-parent room-li-style">
+        <div class="flex-none">
+           <img class="deviceicon" src="img/light.png" alt="" style="width: 40px;">
+        </div>
+
+        <div class="flex-child">
+          <p class="devicename">Workshop lamp</p>
+          
+        </div>
+        <div class="flex-none" style="margin-right: 5%;
+    margin-top: 5%;">
+         <label class="switch" style="">
+           <input  type="checkbox" data-role="none" c>
+          <span class="slider round"></span>
+          </label>
+        </div>
+     
+      </li>
+    
+     </ul></a>
+
+     <ul>
+
+       <li class="flex-parent room-li-style">
+        <div class="flex-none">
+           <img class="deviceicon" src="img/light.png" alt="" style="width: 40px;">
+        </div>
+
+        <div class="flex-child">
+          <p class="devicename">Livingroom lamp</p>
+          
+        </div>
+        <div class="flex-none" style="margin-right: 5%;
+    margin-top: 5%;">
+         <label class="switch" style="">
+           <input  type="checkbox" data-role="none" c>
+          <span class="slider round"></span>
+          </label>
+        </div>
+     
+      </li>
+    
+     </ul>
+
+      <ul>
+
+       <li class="flex-parent room-li-style">
+        <div class="flex-none">
+           <img class="deviceicon" src="img/light.png" alt="" style="width: 40px;">
+        </div>
+
+        <div class="flex-child">
+          <p class="devicename">Bathroom lamp</p>
+          
+        </div>
+        <div class="flex-none" style="margin-right: 5%;
+    margin-top: 5%;">
+         <label class="switch" style="">
+           <input  type="checkbox" data-role="none" c>
+          <span class="slider round"></span>
+          </label>
+        </div>
+     
+      </li>
+    
+     </ul>
+    
+    
+    </div>
+
+    
+
+
+       <footer data-role="footer" data-template="footer-template">
+    
+    </footer>
+  </section>
+
+  <section data-role="page" id="bedsidestting-page">
+     <header data-role="header">
+     <a href="#back" data-rel="back">back</a>
+        <h1>Setting</h1>
+    </header>
+
+    <div data-role="main" >
+
+
+      <ul class="setting-ul-style" >
+
+       <li class="setting-li-style">
+        <label style="margin-top: 5%;margin-left: 5%;">Brightness:</label>
+
+        <div class="flex-parent" style=" margin-left: 10%; margin-bottom: 10%;">
+        <img src="img/brightness.png"  class="flex-none brightness-icon-1" >
+
+        <input type="range" class="js-light-brightness flext-child" value="50" max="255" min="1" step="1" data-lightid="1" data-role="none"> 
+
+        <img src="img/brightness.png" class="flex-none brightness-icon-2">
+        </div>
+         
+      </li>
+    
+     </ul>
+
+     <ul class="setting-ul-style" >
+
+       <li class="setting-li-style">
+        <label style="margin-top: 5%;margin-left: 5%;">Color:</label>
+
+        <div class="flex-parent" style=" margin-left: 10%;margin-bottom: 10%;">
+        <img src="img/brightness.png"  class="flex-none brightness-icon-1" >
+
+        <input type="range" class="js-light-brightness flext-child" value="50" max="255" min="1" step="1" data-lightid="1" data-role="none"> 
+
+        <img src="img/brightness.png" class="flex-none brightness-icon-2">
+        </div>
+         
+      </li>
+    
+     </ul>
+  
+    
+    </div>
+
+    <footer data-role="footer" data-template="footer-template">
+    
+    </footer>
+
+  </section>
+
+  <section data-role="page" id="lampstting-page">
+     <header data-role="header">
+     <a href="#back" data-rel="back">back</a>
+        <h1>Setting</h1>
+    </header>
+
+    <div data-role="main" >
+
+
+      <ul class="setting-ul-style" >
+
+       <li class="setting-li-style">
+        <label style="margin-top: 5%;margin-left: 5%;">Brightness:</label>
+
+        <div class="flex-parent" style=" margin-left: 10%; margin-bottom: 10%;">
+        <img src="img/brightness.png"  class="flex-none brightness-icon-1" >
+
+        <input type="range" class="js-light-brightness flext-child" value="50" max="255" min="1" step="1" data-lightid="1" data-role="none"> 
+
+        <img src="img/brightness.png" class="flex-none brightness-icon-2">
+        </div>
+         
+      </li>
+    
+     </ul>
+
+     <ul class="setting-ul-style" >
+
+       <li class="setting-li-style">
+        <label style="margin-top: 5%;margin-left: 5%;">Color:</label>
+
+        <div class="flex-parent" style=" margin-left: 10%;margin-bottom: 10%;">
+        <img src="img/brightness.png"  class="flex-none brightness-icon-1" >
+
+        <input type="range" class="js-light-brightness flext-child" value="50" max="255" min="1" step="1" data-lightid="1" data-role="none"> 
+
+        <img src="img/brightness.png" class="flex-none brightness-icon-2">
+        </div>
+         
+      </li>
+    
+     </ul>
+    
+    </div>
+
+    <footer data-role="footer" data-template="footer-template">
+    
+    </footer>
+
+  </section>
+
+   <section data-role="page" id="workshopstting-page">
+     <header data-role="header">
+     <a href="#back" data-rel="back">back</a>
+        <h1>Setting</h1>
+    </header>
+
+    <div data-role="main" >
+
+
+      <ul class="setting-ul-style" >
+
+       <li class="setting-li-style">
+        <label style="margin-top: 5%;margin-left: 5%;">Brightness:</label>
+
+        <div class="flex-parent" style=" margin-left: 10%; margin-bottom: 10%;">
+        <img src="img/brightness.png"  class="flex-none brightness-icon-1" >
+
+        <input type="range" class="js-light-brightness flext-child" value="50" max="255" min="1" step="1" data-lightid="1" data-role="none"> 
+
+        <img src="img/brightness.png" class="flex-none brightness-icon-2">
+        </div>
+         
+      </li>
+    
+     </ul>
+
+     <ul class="setting-ul-style" >
+
+       <li class="setting-li-style">
+        <label style="margin-top: 5%;margin-left: 5%;">Color:</label>
+
+        <div class="flex-parent" style=" margin-left: 10%;margin-bottom: 10%;">
+        <img src="img/brightness.png"  class="flex-none brightness-icon-1" >
+
+        <input type="range" class="js-light-brightness flext-child" value="50" max="255" min="1" step="1" data-lightid="1" data-role="none"> 
+
+        <img src="img/brightness.png" class="flex-none brightness-icon-2">
+        </div>
+         
+      </li>
+    
+     </ul>
+    
+    </div>
+
+    <footer data-role="footer" data-template="footer-template">
+    
+    </footer>
+
+  </section>
+	
+</body>
+
+<script type="text/template" id="footer-template">
+<div class="flex-parent btn">
+
+   <div class="flex-child btn">
+   <a href="#main-page">
+    <img src="img/homepage.png" alt="" class="navigation-icon">
+   </a>
+   </div>
+
+   <div class="flex-child btn">
+     <a href="#">
+      <img src="img/sleep.png" alt="" class="navigation-icon">
+ </a>
+   </div>
+
+   <div class="flex-child btn">
+     <a href="#collection-page">
+      <img src="img/sync.png" alt="" class="navigation-icon">
+   </a>
+   </div>
+
+   <div class="flex-child btn">
+     <a href="#userprofile-page">
+       <img src="img/user.png" alt="" class="navigation-icon">
+     </a>
+   </div>
+</html>
